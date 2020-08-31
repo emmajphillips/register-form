@@ -1,1 +1,31 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;700&display=swap");
+
+// Brand Colours
+$red: #fa5d53;
+$blue: #13103f;
+$purple: #662481;
+$light-purple: #9A8C98;
+
+
+
+// global variables
+$primary: $red;
+$info: $purple;
+$dark: $blue;
+$link: $light-purple;
+$link-hover: $purple;
+$danger: $red;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+$body-background-color: $primary;
+$control-border-width: 2px;
+$input-border-color: $light-purple;
+$input-shadow: none;
+
+
+$family-sans-serif: 'Josefin Sans', sans-serif;
+
+
 @import '~bulma/bulma.sass';
