@@ -3,7 +3,7 @@
 ## Technologies used:
 
 - React
-- React-routerdon
+- React-router-dom
 - SASS
 - Bulma
 - FontAwesome
