@@ -22,8 +22,8 @@ function Register() {
   })
 
 
-  const [formFilled, setFormFilled] = useState(false)
   const [formDataCorrect, setFormDataCorrect] = useState(false)
+  const [formFilled, setFormFilled] = useState(false)
   const [passwordsMatch, setPasswordsMatch] = useState(false)
   const [emailValid, setEmailValid] = useState(false)
 
@@ -42,16 +42,16 @@ function Register() {
     }
   }
 
-  const checkEmailValid = async () => {
+  const checkEmailValid = () => {
     const mailformat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
     if (formData.email.match(mailformat)) {
-      await setEmailValid(true)
+      setEmailValid(true)
     } else {
       console.log('Your email is not valid')
     }
   }
 
-  const checkFormIsFilled = async () => {
+  const checkFormIsFilled = () => {
     if (
       formData.name.length >= 1 &&
       formData.email.length >= 1 &&
@@ -59,17 +59,17 @@ function Register() {
       formData.passwordConfirmation.length >= 1 &&
       formData.howDidYouFindOut.length >= 1
     ) {
-      await setFormFilled(true)
+      setFormFilled(true)
     } else {
       console.log('The form is not complete')
     }
   }
 
 
-  const handleErrors = async () => {
-    await checkFormIsFilled()
-    await checkEmailValid()
-    await checkPasswordMatch()
+  const checkForErrors = () => {
+    checkFormIsFilled()
+    checkEmailValid()
+    checkPasswordMatch()
     if (
       formFilled &&
       emailValid &&
@@ -79,9 +79,9 @@ function Register() {
     }
   }
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault()
-    await handleErrors()
+    checkForErrors()
     if (formDataCorrect) {
       console.log(formData)
     }

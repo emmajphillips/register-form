@@ -1,8 +1,10 @@
 import React from 'react'
 
+import HeroBanner from '../common/HeroBanner'
+
 function Login() {
   return (
-    <h1>LOG IN HERE</h1>
+    <HeroBanner text="Log in here..."/>
   )
 }
 
