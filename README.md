@@ -41,9 +41,9 @@ I managed to get a nice looking and responsive form which would submit and conso
 ## Challenges/Bugs:
 - The error handling took me a fair bit longer than expected and I still haven't got it working. I am currently having issues with the updating of state and there being a delay in the setting of the state to release the formData to the console.log. Without the error handling the formData is console logged correctly. However, with the error handling it takes a couple of clicks before the state is set correctly and the data is logged.
 
-I only managed to get the errors logging to the console rather than updating the user on the form. 
+- I only managed to get the errors logging to the console rather than updating the user on the form. 
 
-Usually I would have built the backend to handle any form errors. Upon the request of registering from the user the backend would shoot out any errors. 
+- Usually I would have built the backend to handle any form errors. Upon the request of registering from the user the backend would shoot out any errors. 
 
 ## If I had more time...:
 I would get the above state timing issue fixed first and foremost. Once this is complete I would then adjust the form to show the applicable errors. 
