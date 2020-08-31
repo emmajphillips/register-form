@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { faEnvelope, faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 
@@ -12,7 +12,7 @@ import FormButton from '../common/FormButton'
 import FormLink from '../common/FormLink'
 
 function Register() {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     phoneNumber: '',
@@ -21,16 +21,70 @@ function Register() {
     howDidYouFindOut: ''
   })
 
+
+  const [formFilled, setFormFilled] = useState(false)
+  const [formDataCorrect, setFormDataCorrect] = useState(false)
+  const [passwordsMatch, setPasswordsMatch] = useState(false)
+  const [emailValid, setEmailValid] = useState(false)
+
+
   const handleChange = event => {
     const value = event.target.value
     const updatedFormData = { ...formData, [event.target.name]: value }
     setFormData(updatedFormData)
   }
 
-  const handleSubmit = event => {
+  const checkPasswordMatch = () => {
+    if (formData.password === formData.passwordConfirmation && formData.password.length > 1) {
+      setPasswordsMatch(true)
+    } else {
+      console.log('Your Passwords do not match')
+    }
+  }
+
+  const checkEmailValid = async () => {
+    const mailformat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+    if (formData.email.match(mailformat)) {
+      await setEmailValid(true)
+    } else {
+      console.log('Your email is not valid')
+    }
+  }
+
+  const checkFormIsFilled = async () => {
+    if (
+      formData.name.length >= 1 &&
+      formData.email.length >= 1 &&
+      formData.password.length >= 1 &&
+      formData.passwordConfirmation.length >= 1 &&
+      formData.howDidYouFindOut.length >= 1
+    ) {
+      await setFormFilled(true)
+    } else {
+      console.log('The form is not complete')
+    }
+  }
+
+
+  const handleErrors = async () => {
+    await checkFormIsFilled()
+    await checkEmailValid()
+    await checkPasswordMatch()
+    if (
+      formFilled &&
+      emailValid &&
+      passwordsMatch
+    ) {
+      setFormDataCorrect(true)
+    }
+  }
+
+  const handleSubmit = async event => {
     event.preventDefault()
-    console.log('NOW CHECK FOR ERRORS')
-    console.log(formData)
+    await handleErrors()
+    if (formDataCorrect) {
+      console.log(formData)
+    }
   }
 
 
@@ -110,7 +164,7 @@ function Register() {
           <FormButton
             buttonText='Register'
           />
-          <FormLink to='/login' text='Already have an account?'/>
+          <FormLink to='/login' text='Already have an account?' />
         </Form>
       </PageContainer>
     </>
