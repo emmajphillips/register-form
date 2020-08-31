@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { faEnvelope, faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faUser, faLock, faPhone } from '@fortawesome/free-solid-svg-icons'
 
 
 // component imports
@@ -116,7 +116,7 @@ function Register() {
             name='phoneNumber'
             label='Phone Number (optional)'
             placeholder='phone number'
-            icon={faEnvelope}
+            icon={faPhone}
             value={formData.phoneNumber}
             onChange={handleChange}
           />
