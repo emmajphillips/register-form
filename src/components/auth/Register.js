@@ -21,37 +21,29 @@ function Register() {
     howDidYouFindOut: ''
   })
 
-
-  const [formDataCorrect, setFormDataCorrect] = useState(false)
-  const [formFilled, setFormFilled] = useState(false)
-  const [passwordsMatch, setPasswordsMatch] = useState(false)
-  const [emailValid, setEmailValid] = useState(false)
-
-
   const handleChange = event => {
     const value = event.target.value
     const updatedFormData = { ...formData, [event.target.name]: value }
     setFormData(updatedFormData)
   }
 
-  const checkPasswordMatch = () => {
-    if (formData.password === formData.passwordConfirmation && formData.password.length > 1) {
-      setPasswordsMatch(true)
-    } else {
-      console.log('Your Passwords do not match')
+  const handleSubmit = event => {
+    event.preventDefault()
+    if (isValid()) {
+      console.log(formData)
     }
   }
 
-  const checkEmailValid = () => {
-    const mailformat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-    if (formData.email.match(mailformat)) {
-      setEmailValid(true)
-    } else {
-      console.log('Your email is not valid')
-    }
+  const isValid = () => {
+    if (isCompletedForm() &&
+        isValidEmail() &&
+        passwordsMatch()) {
+      return true
+    } 
+    return false
   }
 
-  const checkFormIsFilled = () => {
+  const isCompletedForm = () => {
     if (
       formData.name.length >= 1 &&
       formData.email.length >= 1 &&
@@ -59,34 +51,32 @@ function Register() {
       formData.passwordConfirmation.length >= 1 &&
       formData.howDidYouFindOut.length >= 1
     ) {
-      setFormFilled(true)
+      return true
     } else {
-      console.log('The form is not complete')
+      logError('The form is not complete')
     }
   }
 
-
-  const checkForErrors = () => {
-    checkFormIsFilled()
-    checkEmailValid()
-    checkPasswordMatch()
-    if (
-      formFilled &&
-      emailValid &&
-      passwordsMatch
-    ) {
-      setFormDataCorrect(true)
+  const isValidEmail = () => {
+    const mailformat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+    if (formData.email.match(mailformat)) {
+      return true
+    } else {
+      logError('Your email is not valid')
     }
   }
 
-  const handleSubmit = event => {
-    event.preventDefault()
-    checkForErrors()
-    if (formDataCorrect) {
-      console.log(formData)
+  const passwordsMatch = () => {
+    if (formData.password === formData.passwordConfirmation && formData.password.length > 1) {
+      return true
+    } else {
+      logError('Your Passwords do not match')
     }
   }
 
+  const logError = message => {
+    console.log(`Error: ${message}`)
+  }
 
   return (
     <>
